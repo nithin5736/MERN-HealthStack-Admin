@@ -25,8 +25,8 @@ export default function WidgetLg() {
       <table className="widgetLgTable">
         <tr className="widgetLgTr">
           <th className="widgetLgTh">Customer</th>
-          <th className="widgetLgTh">Phone Number</th>
-          <th className="widgetLgTh">Account Number</th>
+          {/* <th className="widgetLgTh">Phone Number</th>
+          <th className="widgetLgTh">Account Number</th> */}
           <th className="widgetLgTh">Amount</th>
         </tr>
         {orders.map((o) => {
@@ -35,8 +35,8 @@ export default function WidgetLg() {
               <td className="widgetLgUser">
                 <span className="widgetLgName">{o._doc.accountholder}</span>
               </td>
-              <td className="widgetLgPhone">{o._doc.phone}</td>
-              <td className="widgetLgAccountNumber">{o._doc.accountnumber}</td>
+              {/* <td className="widgetLgPhone">{o._doc.phone}</td>
+              <td className="widgetLgAccountNumber">{o._doc.accountnumber}</td> */}
               <td className="widgetLgAmount">Rs.{o._doc.amount}</td>
             </tr>
           );

@@ -7,7 +7,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
-import { prescriptionRoute } from "../../utils/APIRoutes";
+import {
+  prescriptionRoute,
+  prescriptionStatusRoute,
+} from "../../utils/APIRoutes";
 
 export default function PrescriptionList() {
   const [data, setData] = useState([]);
@@ -16,6 +19,7 @@ export default function PrescriptionList() {
     axios
       .get(prescriptionRoute)
       .then((res) => {
+        console.log(data)
         setData(res.data);
       })
       .catch((err) => {
@@ -24,6 +28,36 @@ export default function PrescriptionList() {
     console.log(data);
   }, []);
 
+  const rejectHandler = (productId, userId) => {
+    axios
+      .post(prescriptionStatusRoute, {
+        status: false,
+        productId,
+        userId
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const acceptHandler = (productId, userId) => {
+    axios
+      .post(prescriptionStatusRoute, {
+        status: true,
+        productId,
+        userId
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const columns = [
     {
       field: "user",
@@ -31,9 +65,7 @@ export default function PrescriptionList() {
       width: 150,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            {params.row._doc.user.firstname}
-          </div>
+          <div className="productListItem">{params.row._doc.user.username}</div>
         );
       },
     },
@@ -69,12 +101,26 @@ export default function PrescriptionList() {
             <button
               style={{ backgroundColor: "black" }}
               className="productListEdit"
+              onClick={(e) => {
+                e.preventDefault();
+                rejectHandler(
+                  params.row._doc.product._id,
+                  params.row._doc.user._id
+                );
+              }}
             >
               ✖
             </button>
             <button
               style={{ backgroundColor: "black" }}
               className="productListEdit"
+              onClick={(e) => {
+                e.preventDefault();
+                acceptHandler(
+                  params.row._doc.product._id,
+                  params.row._doc.user._id
+                );
+              }}
             >
               ✔
             </button>
