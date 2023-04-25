@@ -1,4 +1,4 @@
-export const hostURL = "http://localhost:5000";
+export const hostURL = "https://healthstack-server.vercel.app";
 export const addProductRoute = `${hostURL}/api/products/addProduct`;
 export const allProductsRoute = `${hostURL}/api/products`;
 export const adminLoginRoute = `${hostURL}/api/auth/adminLogin`;
