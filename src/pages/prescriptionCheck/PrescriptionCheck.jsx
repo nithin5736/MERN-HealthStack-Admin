@@ -36,6 +36,7 @@ export default function PrescriptionList() {
         userId
       })
       .then((res) => {
+        alert("Rejected the prescription")
         console.log(res);
       })
       .catch((err) => {
@@ -51,6 +52,7 @@ export default function PrescriptionList() {
         userId
       })
       .then((res) => {
+        alert("Accepted the prescription")
         console.log(res);
       })
       .catch((err) => {
